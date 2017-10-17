@@ -1,0 +1,250 @@
+﻿
+@{
+    ViewBag.Title = "ObtenerRoles";
+}
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-3">Colegio</h1>
+        <p class="lead">CRUD Alta de Rol y Usuarios</p>
+        <hr class="my-4">
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" onclick="showCardRoles()" role="button">Listar Roles</a>
+            <a class="btn btn-primary btn-lg" href="#" role="button" data-toggle='modal' data-target='#mAddRol'>Insertar Rol</a>
+        </p>
+    </div>
+</div>
+
+<div class="col-lg-12" id="cardRoles">
+    <!--style="display:none;"-->
+    <div class="card">
+        <div class="card-body">
+            Roles
+            <table class="table table-bordered table-responsive" id="ExportarExcel">
+                <thead class="table-inverse">
+                    <tr>
+                        <th>#</th>
+                        <th>Rol</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="t_Roles"></tbody>
+            </table>
+            <button id="btnExport">Exportar a Excel</button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-auto mr-auto"></div>
+                    <div class="col-auto"><button type="button" onclick="hidenCardRoles()" class="btn btn-light">Salír</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal Add Rol-->
+<div class="modal fade" id="mAddRol" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Rol</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="col">
+                        <input type="text" id="Id_Rol" value="" />
+                        <label class="label">Nombre del Rol</label>
+                        <input type="text" class="form-control" id="nombreRol" value="" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="addRol()" data-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal Eliminar Rol-->
+<div class="modal fade" id="mEliminarRol" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar Rol</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="col">
+                        <input type="text" id="EId_Rol" value="" />
+                        <label class="label">Esta seguro que desea Eliminar el Rol: <span id="Nombre"></span></label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="EliminarRol()" data-dismiss="modal">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+            typee: "GET",
+            url: "/Rol/ObtenerRoles"
+        }).done(function (data, textStatus, jqXHR) {
+            console.log(data);
+            roles(data);
+        }).fail(function (data, textStatus, jqXHR) {
+            console.log('Error' + data);
+        })
+    })
+    //function showCardRoles() {
+    //        $("#cardRoles").show();
+    //    }
+
+    function hidenCardRoles() {
+        $("#cardRoles").hide();
+    }
+
+    function roles(data) {
+        $("#t_Roles").html("")
+        $.each(data.data, function (i, Item) {
+            $("#t_Roles").append("<tr>"
+                + "<th scope='row'>" + Item.Id_Rol + "</td>"
+                + "<th>" + Item.Nombre + "</td>"
+                + "<th><button type='button' class='bAcciones btn btn-warning' onclick='ObtenerFila(" + Item.Id_Rol + ")' data-toggle='modal' data-target='#mAddRol'><span class='oi' data-glyph='pencil'></span></button>"
+                + "<button type='button' class='bAcciones btn btn-danger' onclick='ObtenerFilaEliminar(" + Item.Id_Rol + ")' data-toggle='modal' data-target='#mEliminarRol'><span class='oi' data-glyph='trash'></span></button></td>")
+        })
+    }
+
+    function ObtenerFila(id) {
+        $("#mAddRol #Id_Rol").val(id)
+        $.ajax({
+            typee: "GET",
+            url: "/Rol/ObtenerRol/" + id
+        }).done(function (data, textStatus, jqXHR) {
+            console.log(data);
+            $("#nombreRol").val(data.data.Nombre)
+        }).fail(function (data, textStatus, jqXHR) {
+            console.log('Error' + data);
+        })
+
+    }
+
+    function addRol() {
+        values = {
+            "Id_Rol": $("#Id_Rol").val(),
+            "Nombre": $("#nombreRol").val()
+        }
+        $.ajax({
+            url: "/Rol/AddRol/",
+            async: true,
+            beforeSend: function () { },
+            dataType: "json",
+            data: JSON.stringify(values),
+            cache: false,
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                alert("Insertado Correctamente");
+                limpiar()
+                $.ajax({
+                    typee: "GET",
+                    url: "/Rol/ObtenerRoles"
+                }).done(function (data, textStatus, jqXHR) {
+                    console.log(data);
+                    roles(data);
+                }).fail(function (data, textStatus, jqXHR) {
+                    console.log('Error' + data);
+                })
+            },
+            error: function (request, status, error) {
+                alert("Error al Insertar");
+            }
+        });
+    }
+    function limpiar() {
+        $("#mAddRol #Id_Rol").val("")
+        $("#mAddRol #nombreRol").val("")
+    }
+
+    function ObtenerFilaEliminar(id) {
+        $("#mEliminarRol #EId_Rol").val(id)
+        $.ajax({
+            typee: "GET",
+            url: "/Rol/ObtenerRol/" + id
+        }).done(function (data, textStatus, jqXHR) {
+            console.log(data);
+            $("#Nombre").text(data.data.Nombre)
+        }).fail(function (data, textStatus, jqXHR) {
+            console.log('Error' + data);
+        })
+    }
+    function EliminarRol() {
+        alert("entro")
+        id = $("#mEliminarRol #EId_Rol").val()
+        $.ajax({
+            typee: "GET",
+            url: "/Rol/EliminarRol/" + id
+        }).done(function (data, textStatus, jqXHR) {
+            console.log(data);
+            $.ajax({
+                typee: "GET",
+                url: "/Rol/ObtenerRoles"
+            }).done(function (data, textStatus, jqXHR) {
+                console.log(data);
+                roles(data);
+            }).fail(function (data, textStatus, jqXHR) {
+                console.log('Error' + data);
+            })
+        }).fail(function (data, textStatus, jqXHR) {
+            console.log('Error' + data);
+        })
+    }
+
+
+
+</script>
+
+<script>
+    ///Exportar a Excel
+
+    $("#btnExport").click(function (e) {
+        //getting values of current time for generating the file name
+        var dt = new Date();
+        var day = dt.getDate();
+        var month = dt.getMonth() + 1;
+        var year = dt.getFullYear();
+        var hour = dt.getHours();
+        var mins = dt.getMinutes();
+        var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
+        //creating a temporary HTML link element (they support setting file names)
+        var a = document.createElement('a');
+        //getting data from our div that contains the HTML table
+        var data_type = 'data:application/vnd.ms-excel;charset=utf-8';
+
+        var table_html = $('#ExportarExcel')[0].outerHTML;
+        //    table_html = table_html.replace(/ /g, '%20');
+        table_html = table_html.replace(/<tfoot[\s\S.]*tfoot>/gmi, '');
+
+        var css_html = '<style>td {border: 0.5pt solid #c0c0c0} .tRight { text-align:right} .tLeft { text-align:left} </style>';
+        //    css_html = css_html.replace(/ /g, '%20');
+
+        a.href = data_type + ',' + encodeURIComponent('<html><head>' + css_html + '</' + 'head><body>' + table_html + '</body></html>');
+
+        //setting the file name
+        a.download = 'exported_table_' + postfix + '.xls';
+        //triggering the function
+        a.click();
+        //just in case, prevent default behaviour
+        e.preventDefault();
+    });
+
+</script>
+

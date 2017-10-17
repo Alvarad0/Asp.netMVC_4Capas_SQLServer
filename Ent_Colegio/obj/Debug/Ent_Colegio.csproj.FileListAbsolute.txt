@@ -1,0 +1,9 @@
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Ent_Colegio\bin\Debug\Ent_Colegio.dll.config
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Ent_Colegio\bin\Debug\Ent_Colegio.dll
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Ent_Colegio\bin\Debug\Ent_Colegio.pdb
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Ent_Colegio\bin\Debug\EntityFramework.dll
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Ent_Colegio\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Ent_Colegio\bin\Debug\EntityFramework.xml
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Ent_Colegio\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Ent_Colegio\obj\Debug\Ent_Colegio.dll
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Ent_Colegio\obj\Debug\Ent_Colegio.pdb

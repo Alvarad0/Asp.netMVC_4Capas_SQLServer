@@ -1,0 +1,9 @@
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Per_Colegio\bin\Debug\Per_Colegio.dll
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Per_Colegio\bin\Debug\Per_Colegio.pdb
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Per_Colegio\bin\Debug\Ent_Colegio.dll
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Per_Colegio\bin\Debug\EntityFramework.dll
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Per_Colegio\bin\Debug\Ent_Colegio.pdb
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Per_Colegio\bin\Debug\EntityFramework.xml
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Per_Colegio\obj\Debug\Per_Colegio.csprojResolveAssemblyReference.cache
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Per_Colegio\obj\Debug\Per_Colegio.dll
+C:\Users\Developer\documents\visual studio 2015\Projects\SistemaColegio\Per_Colegio\obj\Debug\Per_Colegio.pdb

@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @*@Styles.Render("~/Content/css")*@
+    
+    @Scripts.Render("~/bundles/modernizr")
+    
+    @Styles.Render("~/Content/bootstrap-4/css/bootstrap.min.css")
+    @Styles.Render("~/Content/bootstrap-4/css/open-iconic.css")
+    @Styles.Render("~/Content/bootstrap-4/css/page.css")
+    @Scripts.Render("~/Content/bootstrap-4/js/jquery-3.2.1.min.js")
+</head>
+<body>
+        <div class="container">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+        </div>
+    
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")*@
+    @*@RenderSection("scripts", required: false)*@
+
+    <!--Bootstrap 4 -->
+    
+    @Scripts.Render("~/Content/bootstrap-4/js/popper.min.js")
+    @Scripts.Render("~/Content/bootstrap-4/js/bootstrap.min.js")
+</body>
+</html>
